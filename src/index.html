@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./output.css" rel="stylesheet">
+    <title>Currency Converter</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <h1 class="text-3xl font-bold underline">
+        Currency Converter
+    </h1>
+
+    <div class="controls" id="controls">
+        <div class="control">
+            <button id="base">USD</button>
+            <input type="number" id="base-input" value="0" min="0" step="0.1">
+        </div>
+        <div class="control">
+            <button id="target">EUR</button>
+            <input type="number" id="target-input" value="0" readonly>
+        </div>
+        <button class="swap-btn" id="swap-btn">
+            <i class="material-icons-outlined">sync_alt</i>
+        </button>
+        <div class="exchange-rate">
+            <h5>Exchange Rate</h5>
+            <span id="exchange-rate">1 USD = 0.00</span>
+        </div>
+    </div>
+</body>
+
+</html>
