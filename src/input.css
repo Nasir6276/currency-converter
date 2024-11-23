@@ -11,7 +11,7 @@
     --exchange-rate-color: #555;
     --input-background: rgba(119, 136, 153, 0.15);
     --input-shadow: rgba(119, 136, 153, 0.35);
-    --nput-border: #ddd;
+    --input-border: #ddd;
     --shadow-1: rgba(0, 0, 0, 0.25);
     --shadow-2: rgba(0, 0, 0, 0.15);
     --loading-bg-1: #c2cfd6;
@@ -157,4 +157,58 @@ button {
     display: inline-block;
     color: var(--exchange-rate-color);
     font-weight: 500;
+}
+
+.drawer {
+    position: absolute;
+    inset: 0;
+    background: var(--white);
+    padding: 20px;
+    display: grid;
+    align-content: start;
+    gap: 20px;
+}
+
+.title {
+    text-align: center;
+    position: relative;
+}
+
+.title button {
+    position: absolute;
+    top: 50%;
+    inset-inline-start: 0;
+    transform: translateY(-50%);
+    background: transparent;
+    opacity: 0.5;
+}
+
+.title button:hover {
+    opacity: 1;
+}
+
+.search input {
+    width: 100%;
+    font-size: 1rem;
+    padding: 10px 20px;
+    border: 1px solid var(--input-border);
+    border-radius: 10px;
+    outline-color: var(--green);
+}
+
+.currency-list {
+    list-style-type: none;
+    overflow-y: auto;
+}
+
+.currency-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    padding-block: 5px;
+}
+
+.currency-list li:first-child {
+    padding-block-start: 0;
 }
