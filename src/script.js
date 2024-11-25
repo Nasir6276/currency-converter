@@ -1,3 +1,5 @@
+const key = 'fca_live_BpiKXwqZsrPGzhAPOHSQuxhIHi8O43VHxTd0Nmet'
+
 const state = {
     openDrawer: null,
     currencies: []
@@ -39,9 +41,33 @@ const hideDrawer = () => {
 
 // render functions
 
+const displayCurrencies = () => {
+    ui.currencyList.innerHTML = state.currencies.map(({code, name}) => {
+        return `
+            <li data-code=${code}>
+                <img src="https://placeholder.co/48" alt="${name}">
+                <div>
+                    <h4>${code}</h4>
+                    <P>${name}</P>
+                </div>
+            </li>
+        `
+    }).join('')
+}
+
 // helper functions
 
 // api functions
+
+const fetchCurrencies = () => {
+    fetch(`https://api.freecurrencyapi.com/v1/currencies?apikey=${key}`)
+        .then(response => response.json())
+        .then(({data}) => {
+            state.currencies = Object.json;
+            displayCurrencies()
+        })
+        .catch(console.error)
+}
 
 // initialization
 
