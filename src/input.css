@@ -218,3 +218,8 @@ button {
 .currency-list li:first-child {
     padding-block-start: 0;
 }
+
+/* disable click event for non list items  */
+.currency-list *:not(li) {
+    pointer-events: none;
+}

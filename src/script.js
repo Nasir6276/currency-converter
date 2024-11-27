@@ -3,7 +3,9 @@ const key = 'fca_live_BpiKXwqZsrPGzhAPOHSQuxhIHi8O43VHxTd0Nmet'
 const state = {
     openDrawer: null,
     currencies: [],
-    filteredCurrencies: []
+    filteredCurrencies: [],
+    base: 'USD',
+    target: 'EUR'
 }
 
 // selectors
@@ -12,7 +14,9 @@ const ui = {
     drawer: document.getElementById('drawer'),
     dismissBtn: document.getElementById('dismiss-btn'),
     currencyList: document.getElementById('currency-list'),
-    searchInput: document.getElementById('search')
+    searchInput: document.getElementById('search'),
+    baseBtn: document.getElementById('base'),
+    targetBtn: document.getElementById('target')
 }
 
 // event listeners
@@ -21,7 +25,8 @@ const setUpEventListeners = () => {
     document.addEventListener('DOMContentLoaded', initApp);
     ui.controls.addEventListener('click', showDrawer);
     ui.dismissBtn.addEventListener('click', hideDrawer);
-    ui.searchInput.addEventListener('input', filterCurrency)
+    ui.searchInput.addEventListener('input', filterCurrency);
+    ui.currencyList.addEventListener('click', selectPair)
 }
 
 // event handlers
@@ -46,7 +51,7 @@ const hideDrawer = () => {
 const filterCurrency = () => {
     const keyword = ui.searchInput.value.trim().toLowerCase();
     
-    state.filteredCurrencies = state.currencies.filter(({ code, name }) => {
+    state.filteredCurrencies = getAvailableCurrencies().filter(({ code, name }) => {
         return (
             code.toLowerCase().includes(keyword) ||
             name.toLowerCase().includes(keyword)
@@ -54,6 +59,13 @@ const filterCurrency = () => {
     });
 
     displayCurrencies()
+}
+
+const selectPair = (e) => {
+    console.log(e.target)
+    if (e.target.hasAttribute('data-code')) {
+        console.log(e.target.dataset.code)
+    }
 }
 
 // render functions
@@ -74,6 +86,12 @@ const displayCurrencies = () => {
 
 // helper functions
 
+const getAvailableCurrencies = () => {
+    return state.currencies.filter(({code}) => {
+        return state.base !== code && state.target !== code;
+    })
+}
+
 const clearSearchInput = () => {
     ui.searchInput.value = '';
     ui.searchInput.dispatchEvent(new Event('input'))
@@ -92,7 +110,7 @@ const fetchCurrencies = () => {
         .then((response) => response.json())
         .then(({data}) => {
             state.currencies = Object.values(data);
-            state.filteredCurrencies = state.currencies;
+            state.filteredCurrencies = getAvailableCurrencies();
             displayCurrencies()
         })
         .catch(console.error)
