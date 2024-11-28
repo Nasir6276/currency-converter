@@ -5,7 +5,7 @@ const state = {
     currencies: [],
     filteredCurrencies: [],
     base: 'USD',
-    target: 'EUR'
+    target: 'EUR',
 }
 
 // selectors
@@ -62,9 +62,21 @@ const filterCurrency = () => {
 }
 
 const selectPair = (e) => {
-    console.log(e.target)
     if (e.target.hasAttribute('data-code')) {
-        console.log(e.target.dataset.code)
+        const { openedDrawer } = state;
+
+        // update the base or target in the state
+        state[openedDrawer] = e.target.dataset.code;
+
+        // update the btn
+        [ui.baseBtn, ui.targetBtn].forEach((btn) => {
+            const code = state[btn.id];
+
+            btn.textContent = code;
+        })
+
+        // close drawer after selection 
+        hideDrawer()
     }
 }
 
