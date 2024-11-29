@@ -1,7 +1,7 @@
 const key = 'fca_live_BpiKXwqZsrPGzhAPOHSQuxhIHi8O43VHxTd0Nmet'
 
 const state = {
-    openDrawer: null,
+    openedDrawer: null,
     currencies: [],
     filteredCurrencies: [],
     base: 'USD',
@@ -65,7 +65,7 @@ const selectPair = (e) => {
     if (e.target.hasAttribute('data-code')) {
         const { openedDrawer } = state;
 
-        // update the base or target in the state
+        // update the base or target in the state 
         state[openedDrawer] = e.target.dataset.code;
 
         // update the btn
