@@ -73,6 +73,7 @@ const selectPair = (e) => {
             const code = state[btn.id];
 
             btn.textContent = code;
+            btn.style.setProperty()
         })
 
         // close drawer after selection 
